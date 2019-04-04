@@ -1,14 +1,14 @@
 #include<stdio.h>
 
 //functions: encrypt substitution cipher, decrypt substitution cipher, decrypt rotation cipher CIPHER TEXT ONLY, decrypt substitution cipher CIPHER TEXT ONLY
-void rotate_encrypt (char x[], int k);
-void rotate_decrypt (char x[], int k);
+void rotate_encrypt (char x[], int k); //function to encrypt using rotation cipher
+void rotate_decrypt (char x[], int k); //function to decrypt using rotation cipher
 
 int main() {
     char x[1000]; //array to hold string
-    //sprintf(x, "ATTACK AT DAWN"); //prints the phrase to be encoded to the array "x"  above
+    sprintf(x, "ATTACK AT DAWN"); //prints the phrase to be encoded to the array "x"  above
     //sprintf(x, "ABCDEFGHIJKLMNOPQRSTUVWXYZ"); //prints the phrase to be encoded to the array "x"  above
-    sprintf(x, "HEROES ARE IMPORTANT. HEROES TELL US WHO WE WANT TO BE BUT WHEN THEY MADE THIS PARTICULAR HERO THEY DIDN'T GIVE HIM A GUN, THEY GAVE HIM A SCREWDRIVER TO FIX THINGS. THEY DIDN'T GIVE HIM A TANK OR A WARSHIP OR AN X-WING, THEY GAVE HIM A CALL BOX FROM WHICH YOU CAN CALL FOR HELP AND THEY DIDN'T GIVE HIM A SUPERPOWER OR A HEAT RAY, THEY GAVE HIM AN EXTRA HEART. AND THAT'S EXTRAORDINARY. THERE WILL NEVER COME A TIME WHEN WE DON'T NEED A HERO LIKE THE DOCTOR."); //prints the phrase to be encoded to the array "x"  above
+    //sprintf(x, "HEROES ARE IMPORTANT. HEROES TELL US WHO WE WANT TO BE BUT WHEN THEY MADE THIS PARTICULAR HERO THEY DIDN'T GIVE HIM A GUN, THEY GAVE HIM A SCREWDRIVER TO FIX THINGS. THEY DIDN'T GIVE HIM A TANK OR A WARSHIP OR AN X-WING, THEY GAVE HIM A CALL BOX FROM WHICH YOU CAN CALL FOR HELP AND THEY DIDN'T GIVE HIM A SUPERPOWER OR A HEAT RAY, THEY GAVE HIM AN EXTRA HEART. AND THAT'S EXTRAORDINARY. THERE WILL NEVER COME A TIME WHEN WE DON'T NEED A HERO LIKE THE DOCTOR."); //prints the phrase to be encoded to the array "x"  above
     
     //this loop will convert any inputs that are lower case letters to upper case letters
     int y=0; //loop counter
@@ -22,13 +22,28 @@ int main() {
         }
     }
     
-    int k=-15;
+/*    int k=-15; //decryption key
     
     rotate_encrypt (x, k);
     
     k=k-(k*2); //changes encryption key to decode phrase
     
-    rotate_decrypt(x, k);
+    rotate_decrypt(x, k); */
+    
+    y=0;
+    char A[2] = {'A'};
+    printf("%s\n", A);
+    char V[2] = {'V'};
+    printf("%s\n", V);
+    while (x[y]!=NULL) {
+        if(x[y]==A[0]) {
+            printf("a");
+            x[y]=V[0];
+            printf("%c\n", x[y]);
+        }
+        y++;
+    }
+    printf("%s\n", x);
     
     
     
