@@ -6,6 +6,7 @@ void rotate_decrypt (char x[], int k); //function to decrypt using rotation ciph
 void substitute_encryptM (char x[]);
 void substitute_decryptM (char x[]);
 void analysis (char x[]);
+int frq[53]; // declares global array frq
 
 int main() {
     char x[1000]; //array to hold string
@@ -35,10 +36,19 @@ int main() {
     
     
     substitute_encryptM (x); //calls function to encrypt using substitution cipher
-    substitute_decryptM (x); //calls function to decrypt using substitution cipher
+    //substitute_decryptM (x); //calls function to decrypt using substitution cipher
     
     analysis (x);
-  
+    
+    printf("\n\n");
+    int count=1;
+    while(count<53) {
+        printf("%c: %d\n", frq[count-1], frq[count]);
+        count++;
+        count++;
+    }
+    
+    
     
     return 0; 
 }
@@ -434,7 +444,6 @@ void analysis (char x[]) {
         y++;
     }
     y=0;
-    int frq[53];
     frq[y]='A';
     y++;
     frq[y]=a;
@@ -546,11 +555,11 @@ void analysis (char x[]) {
     int counta=0;
     int countb=53;
     
-    while(count<53) {
+    /*while(count<53) {
         printf("%c: %d\n", frq[count-1], frq[count]);
         count++;
         count++;
-    }
+    } */
     
     count=1;
     while(counta<100) {
@@ -575,12 +584,12 @@ void analysis (char x[]) {
     }
     
     
-    printf("\n\n");
+    /*printf("\n\n");
     count=1;
     while(count<53) {
         printf("%c: %d\n", frq[count-1], frq[count]);
         count++;
         count++;
-    }
+    } */
     
 }
