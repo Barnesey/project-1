@@ -5,6 +5,7 @@ void rotate_encrypt (char x[], int k); //function to encrypt using rotation ciph
 void rotate_decrypt (char x[], int k); //function to decrypt using rotation cipher
 void substitute_encryptM (char x[]);
 void substitute_decryptM (char x[]);
+void substitute_decrypt_analysis (char x[]);
 void analysis (char x[]);
 int frq[53]; // declares global array frq
 
@@ -41,14 +42,14 @@ int main() {
     analysis (x);
     
     printf("\n\n");
-    int count=1;
+    /*int count=1;
     while(count<53) {
         printf("%c: %d\n", frq[count-1], frq[count]);
         count++;
         count++;
-    }
+    } */
     
-    
+    substitute_decrypt_analysis (x);
     
     return 0; 
 }
@@ -592,4 +593,57 @@ void analysis (char x[]) {
         count++;
     } */
     
+}
+
+
+
+
+
+
+
+
+
+void substitute_decrypt_analysis (char x[]) {
+    char alph[27] = {"ETAOINSHRDLUCMWFGYPBVKJXQZ"};
+    char test[27] = {"IPCEKADFGTNOWMRQSVXZHULBJY"};
+    analysis (x);
+    int y=1;
+    /*printf("\n\n");
+    while (y<53) {
+        printf("%c: %d\n", frq[y-1], frq[y]);
+        y++;
+        y++;
+    } */
+    
+    y=0;
+    int i=0;
+    int z=0;
+    int a=0;
+    int b=0;
+    int counter=0;
+    int size = sizeof(x)/sizeof(x[0]);
+    size+=2;
+    char temp[1000];
+    while(y<=30) {
+        while(counter<26) {
+            if(test[z]==frq[i]) {
+                test[z]=alph[a];
+                printf("%s\n", test);
+                /*if(x[b]!=NULL) {
+                    temp[b]=x[b];
+                    b++;
+                } */
+                break;
+            }
+            counter++;
+            i++;
+            i++;
+        }
+        y++;
+        z++;
+        i=0;
+        counter=0;
+        a++;
+    }
+    printf("\n%s\n", test); 
 }
