@@ -6,8 +6,9 @@ void rotate_decrypt (char x[], int k); //function to decrypt using rotation ciph
 void substitute_encryptM (char x[]); //function to encrypt using substitution cipher - manual selection of key
 void substitute_decryptM (char x[]); //function to decrypt using substitution cipher - manual selection of key
 void analysis (char x[]); //analyses frequency of letters in a string for statistical decryption
-void substitute_decrypt_analysis (char x[]); //function to decrypt using substitution cipher statistically
+void substitute_decrypt_analysis (); //function to decrypt using substitution cipher statistically
 int frq[53]; // declares global array frq to hold the frequency of letters for statistical decryption
+char str[1000] ;//= {"EIKDIR PKI AOXDKCPFC. EIKDIR CINN VR TED TI TPFC CD HI HVC TEIF CEIW OPGI CEAR XPKCAQVNPK EIKD CEIW GAGF'C MASI EAO P MVF, CEIW MPSI EAO P RQKITGKASIK CD UAZ CEAFMR. CEIW GAGF'C MASI EAO P CPFL DK P TPKREAX DK PF Z-TAFM, CEIW MPSI EAO P QPNN HDZ UKDO TEAQE WDV QPF QPNN UDK EINX PFG CEIW GAGF'C MASI EAO P RVXIKXDTIK DK P EIPC KPW, CEIW MPSI EAO PF IZCKP EIPKC. PFG CEPC'R IZCKPDKGAFPKW. CEIKI TANN FISIK QDOI P CAOI TEIF TI GDF'C FIIG P EIKD NALI CEI GDQCDK."};
 
 int main() {
     char x[1000]; //array to hold string
@@ -50,7 +51,7 @@ int main() {
         count++;
     } */
     
-    substitute_decrypt_analysis (x); //calls function to decrypt using substitution cipher statistically
+    substitute_decrypt_analysis (); //calls function to decrypt using substitution cipher statistically
     
     return 0; 
 }
@@ -240,7 +241,9 @@ void substitute_encryptM (char x[]) {
         }
         y++;
     }
-    printf("%s\n", x); //prints encrypted message
+    //printf("%s\n", x); //prints encrypted message
+    sprintf(str, "%s", x);
+    printf("%s\n", str);
 }
 
 
@@ -615,11 +618,11 @@ void analysis (char x[]) {
 
 
 
-void substitute_decrypt_analysis (char x[]) {
+void substitute_decrypt_analysis () {
     //decrypts message statistically
     char alph[27] = {"ETAOINSHRDLUCMWFGYPBVKJXQZ"}; //alphabet in order of most common letters
-    char test[27] = {"IPCEKADFGTNOWMRQSVXZHULBJY"}; //most common letters of encrypted moffat to check code
-    analysis (x); //calls analysis function for frequency of letters
+    //char test[27] = {"IPCEKADFGTNOWMRQSVXZHULBJY"}; //most common letters of encrypted moffat to check code
+    analysis (str); //calls analysis function for frequency of letters
     int y=1;
     /*printf("\n\n");
     while (y<53) {
@@ -632,16 +635,16 @@ void substitute_decrypt_analysis (char x[]) {
     int i=0;
     int z=0;
     int a=0;
-    int b=0;
+    //int b=0;
     int counter=0;
-    int size = sizeof(x)/sizeof(x[0]); //calculates the how many characters there are in "x" (for how many times to run loop)
+    int size = sizeof(str)/sizeof(str[0]); //calculates the how many characters there are in "x" (for how many times to run loop)
     size+=2; //adds 2 to the loop counter condition to make sure every letter is changed
-    char temp[1000];
-    while(y<=30) {
+    //char temp[1000];
+    while(y<=size) {
         while(counter<26) {
-            if(test[z]==frq[i]) { //checks whether the character to be decoded is the same as the character of "frq" being checked
-                test[z]=alph[a]; //if so, makes the tested character equal to the equivalently frequent letter
-                printf("%s\n", test); //prints rectified (partially) string
+            if(str[z]==frq[i]) { //checks whether the character to be decoded is the same as the character of "frq" being checked
+                str[z]=alph[a]; //if so, makes the tested character equal to the equivalently frequent letter
+                //printf("%s\n", test); //prints rectified (partially) string
                 /*if(x[b]!=NULL) {
                     temp[b]=x[b];
                     b++;
@@ -661,5 +664,5 @@ void substitute_decrypt_analysis (char x[]) {
         counter=0;
         a=0;
     }
-    printf("\n%s\n", test); //prints decoded message
+    printf("\n%s\n", str); //prints decoded message
 }
