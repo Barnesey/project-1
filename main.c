@@ -3,11 +3,11 @@
 //functions: encrypt substitution cipher, decrypt substitution cipher, decrypt rotation cipher CIPHER TEXT ONLY, decrypt substitution cipher CIPHER TEXT ONLY
 void rotate_encrypt (char x[], int k); //function to encrypt using rotation cipher
 void rotate_decrypt (char x[], int k); //function to decrypt using rotation cipher
-void substitute_encryptM (char x[]);
-void substitute_decryptM (char x[]);
-void substitute_decrypt_analysis (char x[]);
-void analysis (char x[]);
-int frq[53]; // declares global array frq
+void substitute_encryptM (char x[]); //function to encrypt using substitution cipher - manual selection of key
+void substitute_decryptM (char x[]); //function to decrypt using substitution cipher - manual selection of key
+void analysis (char x[]); //analyses frequency of letters in a string for statistical decryption
+void substitute_decrypt_analysis (char x[]); //function to decrypt using substitution cipher statistically
+int frq[53]; // declares global array frq to hold the frequency of letters for statistical decryption
 
 int main() {
     char x[1000]; //array to hold string
@@ -39,9 +39,10 @@ int main() {
     substitute_encryptM (x); //calls function to encrypt using substitution cipher
     //substitute_decryptM (x); //calls function to decrypt using substitution cipher
     
-    analysis (x);
+    analysis (x); // calls function to analyse the frequency of letters
     
-    printf("\n\n");
+    printf("\n\n"); //prints new lines for gap
+    //prints the letters in order of frequency and number of times they appear as determined in analysis function
     /*int count=1;
     while(count<53) {
         printf("%c: %d\n", frq[count-1], frq[count]);
@@ -49,7 +50,7 @@ int main() {
         count++;
     } */
     
-    substitute_decrypt_analysis (x);
+    substitute_decrypt_analysis (x); //calls function to decrypt using substitution cipher statistically
     
     return 0; 
 }
@@ -149,22 +150,24 @@ void rotate_decrypt (char x[], int k) {
 
 void substitute_encryptM (char x[]) {
     int y=0;
+    //creating a bunch of strings containing one letter each to encrypt
     char A[2] = {'A'}; char B[2] = {'B'}; char C[2] = {'C'}; char D[2] = {'D'}; char E[2] = {'E'}; char F[2] = {'F'}; char G[2] = {'G'};
     char H[2] = {'H'}; char I[2] = {'I'}; char J[2] = {'J'}; char K[2] = {'K'}; char L[2] = {'L'}; char M[2] = {'M'}; char N[2] = {'N'};
     char O[2] = {'O'}; char P[2] = {'P'}; char Q[2] = {'Q'}; char R[2] = {'R'}; char S[2] = {'S'}; char T[2] = {'T'}; char U[2] = {'U'}; 
     char V[2] = {'V'}; char W[2] = {'W'}; char X[2] = {'X'}; char Y[2] = {'Y'}; char Z[2] = {'Z'}; 
     
-    while (x[y]!=NULL) {
-        if(x[y]==A[0]) {
+    //encrypts each letter of string "x" according to a key i found online
+    while (x[y]!=NULL) { //continues for length of string "x"
+        if(x[y]==A[0]) { //if the character is "A", it will be changed to "P"
             x[y]=P[0];
         }
-        else if(x[y]==B[0]) {
+        else if(x[y]==B[0]) { //if the character is "B", it will be changed to "H"
             x[y]=H[0];
         }
-        else if(x[y]==C[0]) {
+        else if(x[y]==C[0]) { //etcetera
             x[y]=Q[0];
         }
-        else if(x[y]==D[0]) {
+        else if(x[y]==D[0]) { //etcetera
             x[y]=G[0];
         }
         else if(x[y]==E[0]) {
@@ -237,7 +240,7 @@ void substitute_encryptM (char x[]) {
         }
         y++;
     }
-    printf("%s\n", x);
+    printf("%s\n", x); //prints encrypted message
 }
 
 
@@ -245,22 +248,24 @@ void substitute_encryptM (char x[]) {
 
 void substitute_decryptM (char x[]) {
     int y=0;
+    //creating a bunch of strings containing one letter each to decrypt
     char A[2] = {'A'}; char B[2] = {'B'}; char C[2] = {'C'}; char D[2] = {'D'}; char E[2] = {'E'}; char F[2] = {'F'}; char G[2] = {'G'};
     char H[2] = {'H'}; char I[2] = {'I'}; char J[2] = {'J'}; char K[2] = {'K'}; char L[2] = {'L'}; char M[2] = {'M'}; char N[2] = {'N'};
     char O[2] = {'O'}; char P[2] = {'P'}; char Q[2] = {'Q'}; char R[2] = {'R'}; char S[2] = {'S'}; char T[2] = {'T'}; char U[2] = {'U'}; 
     char V[2] = {'V'}; char W[2] = {'W'}; char X[2] = {'X'}; char Y[2] = {'Y'}; char Z[2] = {'Z'}; 
     
-    while (x[y]!=NULL) {
-        if(x[y]==P[0]) {
+    //decrypts each letter of string "x" according to a key i found online (same as above encryption function)
+    while (x[y]!=NULL) { //continues for length of string "x"
+        if(x[y]==P[0]) { //if the character is "P", it will be changed to "A"
             x[y]=A[0];
         }
-        else if(x[y]==H[0]) {
+        else if(x[y]==H[0]) { //if the character is "H", it will be changed to "B"
             x[y]=B[0];
         }
-        else if(x[y]==Q[0]) {
+        else if(x[y]==Q[0]) { //etcetera
             x[y]=C[0];
         }
-        else if(x[y]==G[0]) {
+        else if(x[y]==G[0]) { //etcetera
             x[y]=D[0];
         }
         else if(x[y]==I[0]) {
@@ -333,7 +338,7 @@ void substitute_decryptM (char x[]) {
         }
         y++;
     }
-    printf("%s\n", x);
+    printf("%s\n", x); //prints decrypted message
 }
 
 
@@ -350,27 +355,29 @@ void substitute_decryptM (char x[]) {
 
 
 void analysis (char x[]) {
-    //char x[1000] = {"EIKDIR PKI AOXDKCPFC. EIKDIR CINN VR TED TI TPFC CD HI HVC TEIF CEIW OPGI CEAR XPKCAQVNPK EIKD CEIW GAGF'C MASI EAO P MVF, CEIW MPSI EAO P RQKITGKASIK CD UAZ CEAFMR. CEIW GAGF'C MASI EAO P CPFL DK P TPKREAX DK PF Z-TAFM, CEIW MPSI EAO P QPNN HDZ UKDO TEAQE WDV QPF QPNN UDK EINX PFG CEIW GAGF'C MASI EAO P RVXIKXDTIK DK P EIPC KPW, CEIW MPSI EAO PF IZCKP EIPKC. PFG CEPC'R IZCKPDKGAFPKW. CEIKI TANN FISIK QDOI P CAOI TEIF TI GDF'C FIIG P EIKD NALI CEI GDQCDK."};
+    //char x[1000] = {"EIKDIR PKI AOXDKCPFC. EIKDIR CINN VR TED TI TPFC CD HI HVC TEIF CEIW OPGI CEAR XPKCAQVNPK EIKD CEIW GAGF'C MASI EAO P MVF, CEIW MPSI EAO P RQKITGKASIK CD UAZ CEAFMR. CEIW GAGF'C MASI EAO P CPFL DK P TPKREAX DK PF Z-TAFM, CEIW MPSI EAO P QPNN HDZ UKDO TEAQE WDV QPF QPNN UDK EINX PFG CEIW GAGF'C MASI EAO P RVXIKXDTIK DK P EIPC KPW, CEIW MPSI EAO PF IZCKP EIPKC. PFG CEPC'R IZCKPDKGAFPKW. CEIKI TANN FISIK QDOI P CAOI TEIF TI GDF'C FIIG P EIKD NALI CEI GDQCDK."}; //here  for writing separately commented out when put into function
     //printf("%s\n", x);
     int y=0;
+    //creating a bunch of strings containing one letter each for analysis
     char A[2] = {'A'}; char B[2] = {'B'}; char C[2] = {'C'}; char D[2] = {'D'}; char E[2] = {'E'}; char F[2] = {'F'}; char G[2] = {'G'};
     char H[2] = {'H'}; char I[2] = {'I'}; char J[2] = {'J'}; char K[2] = {'K'}; char L[2] = {'L'}; char M[2] = {'M'}; char N[2] = {'N'};
     char O[2] = {'O'}; char P[2] = {'P'}; char Q[2] = {'Q'}; char R[2] = {'R'}; char S[2] = {'S'}; char T[2] = {'T'}; char U[2] = {'U'}; 
     char V[2] = {'V'}; char W[2] = {'W'}; char X[2] = {'X'}; char Y[2] = {'Y'}; char Z[2] = {'Z'}; 
+    //creates a bunch of integers to track frequency
     int a=0, b=0, c=0, d=0, e=0, f=0, g=0, h=0, i=0, j=0, k=0, l=0, m=0, n=0, o=0, p=0, q=0, r=0, s=0, t=0, u=0, v=0, w=0, xn=0, yn=0, z=0;
     
-    while (x[y]!=NULL) {
-        if(x[y]>64 && x[y]<91) {
-            if(x[y]==A[0]) {
+    while (x[y]!=NULL) { //continues until end of message
+        if(x[y]>64 && x[y]<91) { //keeps track of letters only (uses ascii)
+            if(x[y]==A[0]) { //if the character is "A", increments "a"
                 a++;
             }
-            else if(x[y]==B[0]) {
+            else if(x[y]==B[0]) { //if the character is "B", increments "b"
                 b++;
             }
-            else if(x[y]==C[0]) {
+            else if(x[y]==C[0]) { //etcetera
                 c++;
             }
-            else if(x[y]==D[0]) {
+            else if(x[y]==D[0]) { //etcetera
                 d++;
             }
             else if(x[y]==E[0]) {
@@ -442,24 +449,24 @@ void analysis (char x[]) {
             else {
             }
         }
-        y++;
+        y++; //increments y to continue loop
     }
     y=0;
-    frq[y]='A';
+    frq[y]='A'; //assigns "A", to frq[0]
     y++;
-    frq[y]=a;
+    frq[y]=a; //assigns how many times "A" appears to frq[1]
     y++;
-    frq[y]='B';
+    frq[y]='B'; //assigns "B", to frq[2]
     y++;
-    frq[y]=b;
+    frq[y]=b; //assigns how many times "B" appears to frq[3]
     y++;
-    frq[y]='C';
+    frq[y]='C'; //etcetera
     y++;
-    frq[y]=c;
+    frq[y]=c; //etcetera
     y++;
-    frq[y]='D';
+    frq[y]='D'; //etcetera
     y++;
-    frq[y]=d;
+    frq[y]=d; //etcetera
     y++;
     frq[y]='E';
     y++;
@@ -548,6 +555,7 @@ void analysis (char x[]) {
     frq[y]='Z';
     y++;
     frq[y]=z;
+    //declares/resets integers to order frq
     y=0;
     int count=1;
     int counter=3;
@@ -563,25 +571,29 @@ void analysis (char x[]) {
     } */
     
     count=1;
-    while(counta<100) {
-        while (counter<countb) {
-            if (frq[count] < frq[counter]) {
-                temp = frq[count];
+    while(counta<100) { //repeats until
+        while (counter<countb) { //
+            if (frq[count] < frq[counter]) { //checks which number is bigger
+                //assigns the greater number sooner in the array
+                temp = frq[count]; 
                 frq[count] = frq[counter];
                 frq[counter] = temp;
+                //assigns corresponding letters also sooner in the array
                 temporary = frq[count-1];
                 frq[count-1] = frq[counter-1];
                 frq[counter-1] = temporary;
             }
+            //increments counters twice to allow for the letters
             count++;
             count++;
             counter++;
             counter++;
         }
+        //resets counters to repeat loop
         count=1;
         counter=3;
         countb--;
-        counta++;
+        counta++; //increments counter for this loop
     }
     
     
@@ -604,9 +616,10 @@ void analysis (char x[]) {
 
 
 void substitute_decrypt_analysis (char x[]) {
-    char alph[27] = {"ETAOINSHRDLUCMWFGYPBVKJXQZ"};
-    char test[27] = {"IPCEKADFGTNOWMRQSVXZHULBJY"};
-    analysis (x);
+    //decrypts message statistically
+    char alph[27] = {"ETAOINSHRDLUCMWFGYPBVKJXQZ"}; //alphabet in order of most common letters
+    char test[27] = {"IPCEKADFGTNOWMRQSVXZHULBJY"}; //most common letters of encrypted moffat to check code
+    analysis (x); //calls analysis function for frequency of letters
     int y=1;
     /*printf("\n\n");
     while (y<53) {
@@ -621,29 +634,32 @@ void substitute_decrypt_analysis (char x[]) {
     int a=0;
     int b=0;
     int counter=0;
-    int size = sizeof(x)/sizeof(x[0]);
-    size+=2;
+    int size = sizeof(x)/sizeof(x[0]); //calculates the how many characters there are in "x" (for how many times to run loop)
+    size+=2; //adds 2 to the loop counter condition to make sure every letter is changed
     char temp[1000];
     while(y<=30) {
         while(counter<26) {
-            if(test[z]==frq[i]) {
-                test[z]=alph[a];
-                printf("%s\n", test);
+            if(test[z]==frq[i]) { //checks whether the character to be decoded is the same as the character of "frq" being checked
+                test[z]=alph[a]; //if so, makes the tested character equal to the equivalently frequent letter
+                printf("%s\n", test); //prints rectified (partially) string
                 /*if(x[b]!=NULL) {
                     temp[b]=x[b];
                     b++;
                 } */
-                break;
+                break; //breaks out of first while loop
             }
+            //if condition not fulfillded, increments relevant counters
             counter++;
+            i++; //incremented twice due to letters and numbers
             i++;
-            i++;
+            a++;
         }
-        y++;
-        z++;
+        y++; //increments y to continue this loop
+        z++; //increments z to check the next letter of the code
+        //resets relevant counters to restart nested loop
         i=0;
         counter=0;
-        a++;
+        a=0;
     }
-    printf("\n%s\n", test); 
+    printf("\n%s\n", test); //prints decoded message
 }
