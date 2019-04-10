@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-//functions: encrypt substitution cipher, decrypt substitution cipher, decrypt rotation cipher CIPHER TEXT ONLY, decrypt substitution cipher CIPHER TEXT ONLY
+//functions: decrypt rotation cipher CIPHER TEXT ONLY, decrypt substitution cipher CIPHER TEXT ONLY
 void rotate_encrypt (char x[], int k); //function to encrypt using rotation cipher
 void rotate_decrypt (char x[], int k); //function to decrypt using rotation cipher
 void substitute_encryptM (char x[]); //function to encrypt using substitution cipher - manual selection of key
@@ -40,7 +40,7 @@ int main() {
     substitute_encryptM (x); //calls function to encrypt using substitution cipher
     //substitute_decryptM (x); //calls function to decrypt using substitution cipher
     
-    analysis (x); // calls function to analyse the frequency of letters
+    //analysis (x); // calls function to analyse the frequency of letters
     
     printf("\n\n"); //prints new lines for gap
     //prints the letters in order of frequency and number of times they appear as determined in analysis function
@@ -151,96 +151,20 @@ void rotate_decrypt (char x[], int k) {
 
 void substitute_encryptM (char x[]) {
     int y=0;
-    //creating a bunch of strings containing one letter each to encrypt
-    char A[2] = {'A'}; char B[2] = {'B'}; char C[2] = {'C'}; char D[2] = {'D'}; char E[2] = {'E'}; char F[2] = {'F'}; char G[2] = {'G'};
-    char H[2] = {'H'}; char I[2] = {'I'}; char J[2] = {'J'}; char K[2] = {'K'}; char L[2] = {'L'}; char M[2] = {'M'}; char N[2] = {'N'};
-    char O[2] = {'O'}; char P[2] = {'P'}; char Q[2] = {'Q'}; char R[2] = {'R'}; char S[2] = {'S'}; char T[2] = {'T'}; char U[2] = {'U'}; 
-    char V[2] = {'V'}; char W[2] = {'W'}; char X[2] = {'X'}; char Y[2] = {'Y'}; char Z[2] = {'Z'}; 
-    
-    //encrypts each letter of string "x" according to a key i found online
-    while (x[y]!=NULL) { //continues for length of string "x"
-        if(x[y]==A[0]) { //if the character is "A", it will be changed to "P"
-            x[y]=P[0];
+    int z=0;
+    char key[27] = {"PHQGIUMEAYLNOFDXJKRCVSTZWB"}; //key for encryption
+    char alpha[27] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"}; //alphabet for comparison
+    while(x[z]!=NULL) { //loop continues until end of message
+        while(y<=26) { //this loop will continue through the alphabet
+            if(x[z]==alpha[y]) { //changes the letter according to the key. e.g. 'A' becomes 'P', 'B' becomes 'H', etcetera
+                x[z]=key[y];
+                break; //breaks out of the first while loop
+            }
+            y++; //increments counter if the letter of the message being checked doesnt become the letter of the key being checked
         }
-        else if(x[y]==B[0]) { //if the character is "B", it will be changed to "H"
-            x[y]=H[0];
-        }
-        else if(x[y]==C[0]) { //etcetera
-            x[y]=Q[0];
-        }
-        else if(x[y]==D[0]) { //etcetera
-            x[y]=G[0];
-        }
-        else if(x[y]==E[0]) {
-            x[y]=I[0];
-        }
-        else if(x[y]==F[0]) {
-            x[y]=U[0];
-        }
-        else if(x[y]==G[0]) {
-            x[y]=M[0];
-        }
-        else if(x[y]==H[0]) {
-            x[y]=E[0];
-        }
-        else if(x[y]==I[0]) {
-            x[y]=A[0];
-        }
-        else if(x[y]==J[0]) {
-            x[y]=Y[0];
-        }
-        else if(x[y]==K[0]) {
-            x[y]=L[0];
-        }
-        else if(x[y]==L[0]) {
-            x[y]=N[0];
-        }
-        else if(x[y]==M[0]) {
-            x[y]=O[0];
-        }
-        else if(x[y]==N[0]) {
-            x[y]=F[0];
-        }
-        else if(x[y]==O[0]) {
-            x[y]=D[0];
-        }
-        else if(x[y]==P[0]) {
-            x[y]=X[0];
-        }
-        else if(x[y]==Q[0]) {
-            x[y]=J[0];
-        }
-        else if(x[y]==R[0]) {
-            x[y]=K[0];
-        }
-        else if(x[y]==S[0]) {
-            x[y]=R[0];
-        }
-        else if(x[y]==T[0]) {
-            x[y]=C[0];
-        }
-        else if(x[y]==U[0]) {
-            x[y]=V[0];
-        }
-        else if(x[y]==V[0]) {
-            x[y]=S[0];
-        }
-        else if(x[y]==W[0]) {
-            x[y]=T[0];
-        }
-        else if(x[y]==X[0]) {
-            x[y]=Z[0];
-        }
-        else if(x[y]==Y[0]) {
-            x[y]=W[0];
-        }
-        else if(x[y]==Z[0]) {
-            x[y]=B[0];
-        }
-        else {
-        }
-        y++;
-    }
+        y=0; //resets loop counter/alphabet counter to restart inner loop
+        z++; //increments for this loop and to check the next letter of the message
+    } 
     //printf("%s\n", x); //prints encrypted message
     sprintf(str, "%s", x);
     printf("%s\n", str);
@@ -251,96 +175,20 @@ void substitute_encryptM (char x[]) {
 
 void substitute_decryptM (char x[]) {
     int y=0;
-    //creating a bunch of strings containing one letter each to decrypt
-    char A[2] = {'A'}; char B[2] = {'B'}; char C[2] = {'C'}; char D[2] = {'D'}; char E[2] = {'E'}; char F[2] = {'F'}; char G[2] = {'G'};
-    char H[2] = {'H'}; char I[2] = {'I'}; char J[2] = {'J'}; char K[2] = {'K'}; char L[2] = {'L'}; char M[2] = {'M'}; char N[2] = {'N'};
-    char O[2] = {'O'}; char P[2] = {'P'}; char Q[2] = {'Q'}; char R[2] = {'R'}; char S[2] = {'S'}; char T[2] = {'T'}; char U[2] = {'U'}; 
-    char V[2] = {'V'}; char W[2] = {'W'}; char X[2] = {'X'}; char Y[2] = {'Y'}; char Z[2] = {'Z'}; 
-    
-    //decrypts each letter of string "x" according to a key i found online (same as above encryption function)
-    while (x[y]!=NULL) { //continues for length of string "x"
-        if(x[y]==P[0]) { //if the character is "P", it will be changed to "A"
-            x[y]=A[0];
+    int z=0;
+    char key[27] = {"PHQGIUMEAYLNOFDXJKRCVSTZWB"}; //key for decryption
+    char alpha[27] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"}; //alphabet for comparison
+    while(x[z]!=NULL) { //loop continues until end of message
+        while(y<=26) { //this loop will continue through the alphabet
+            if(x[z]==key[y]) { //changes the letter according to the key. e.g. 'P' becomes 'A', 'H' becomes 'B', etcetera
+                x[z]=alpha[y];
+                break; //breaks out of the first while loop
+            }
+            y++; //increments counter if the letter of the message being checked doesnt become the letter of the key being checked
         }
-        else if(x[y]==H[0]) { //if the character is "H", it will be changed to "B"
-            x[y]=B[0];
-        }
-        else if(x[y]==Q[0]) { //etcetera
-            x[y]=C[0];
-        }
-        else if(x[y]==G[0]) { //etcetera
-            x[y]=D[0];
-        }
-        else if(x[y]==I[0]) {
-            x[y]=E[0];
-        }
-        else if(x[y]==U[0]) {
-            x[y]=F[0];
-        }
-        else if(x[y]==M[0]) {
-            x[y]=G[0];
-        }
-        else if(x[y]==E[0]) {
-            x[y]=H[0];
-        }
-        else if(x[y]==A[0]) {
-            x[y]=I[0];
-        }
-        else if(x[y]==Y[0]) {
-            x[y]=J[0];
-        }
-        else if(x[y]==L[0]) {
-            x[y]=K[0];
-        }
-        else if(x[y]==N[0]) {
-            x[y]=L[0];
-        }
-        else if(x[y]==O[0]) {
-            x[y]=M[0];
-        }
-        else if(x[y]==F[0]) {
-            x[y]=N[0];
-        }
-        else if(x[y]==D[0]) {
-            x[y]=O[0];
-        }
-        else if(x[y]==X[0]) {
-            x[y]=P[0];
-       }
-        else if(x[y]==J[0]) {
-            x[y]=Q[0];
-        }
-        else if(x[y]==K[0]) {
-            x[y]=R[0];
-        }
-        else if(x[y]==R[0]) {
-            x[y]=S[0];
-       }
-        else if(x[y]==C[0]) {
-            x[y]=T[0];
-        }
-        else if(x[y]==V[0]) {
-            x[y]=U[0];
-        }
-        else if(x[y]==S[0]) {
-            x[y]=V[0];
-        }
-        else if(x[y]==T[0]) {
-            x[y]=W[0];
-        }
-        else if(x[y]==Z[0]) {
-            x[y]=X[0];
-        }
-        else if(x[y]==W[0]) {
-            x[y]=Y[0];
-        }
-        else if(x[y]==B[0]) {
-            x[y]=Z[0];
-        }
-        else {
-        }
-        y++;
-    }
+        y=0; //resets loop counter/alphabet counter to restart inner loop
+        z++; //increments for this loop and to check the next letter of the message
+    } 
     printf("%s\n", x); //prints decrypted message
 }
 
