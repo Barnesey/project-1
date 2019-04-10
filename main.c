@@ -9,12 +9,17 @@ void analysis (char x[]); //analyses frequency of letters in a string for statis
 void substitute_decrypt_analysis (); //function to decrypt using substitution cipher statistically
 int frq[53]; // declares global array frq to hold the frequency of letters for statistical decryption
 char str[1000] ;//= {"EIKDIR PKI AOXDKCPFC. EIKDIR CINN VR TED TI TPFC CD HI HVC TEIF CEIW OPGI CEAR XPKCAQVNPK EIKD CEIW GAGF'C MASI EAO P MVF, CEIW MPSI EAO P RQKITGKASIK CD UAZ CEAFMR. CEIW GAGF'C MASI EAO P CPFL DK P TPKREAX DK PF Z-TAFM, CEIW MPSI EAO P QPNN HDZ UKDO TEAQE WDV QPF QPNN UDK EINX PFG CEIW GAGF'C MASI EAO P RVXIKXDTIK DK P EIPC KPW, CEIW MPSI EAO PF IZCKP EIPKC. PFG CEPC'R IZCKPDKGAFPKW. CEIKI TANN FISIK QDOI P CAOI TEIF TI GDF'C FIIG P EIKD NALI CEI GDQCDK."};
-char x[1000]; //array to hold string
+char x[1000]; //global array to hold string
 
 int main() {
     //sprintf(x, "ATTACK AT DAWN"); //prints the phrase to be encoded to the array "x"  above
     //sprintf(x, "ABCDEFGHIJKLMNOPQRSTUVWXYZ"); //prints the phrase to be encoded to the array "x"  above
-    sprintf(x, "HEROES ARE IMPORTANT. HEROES TELL US WHO WE WANT TO BE BUT WHEN THEY MADE THIS PARTICULAR HERO THEY DIDN'T GIVE HIM A GUN, THEY GAVE HIM A SCREWDRIVER TO FIX THINGS. THEY DIDN'T GIVE HIM A TANK OR A WARSHIP OR AN X-WING, THEY GAVE HIM A CALL BOX FROM WHICH YOU CAN CALL FOR HELP AND THEY DIDN'T GIVE HIM A SUPERPOWER OR A HEAT RAY, THEY GAVE HIM AN EXTRA HEART. AND THAT'S EXTRAORDINARY. THERE WILL NEVER COME A TIME WHEN WE DON'T NEED A HERO LIKE THE DOCTOR."); //prints the phrase to be encoded to the array "x"  above
+    //sprintf(x, "HEROES ARE IMPORTANT. HEROES TELL US WHO WE WANT TO BE BUT WHEN THEY MADE THIS PARTICULAR HERO THEY DIDN'T GIVE HIM A GUN, THEY GAVE HIM A SCREWDRIVER TO FIX THINGS. THEY DIDN'T GIVE HIM A TANK OR A WARSHIP OR AN X-WING, THEY GAVE HIM A CALL BOX FROM WHICH YOU CAN CALL FOR HELP AND THEY DIDN'T GIVE HIM A SUPERPOWER OR A HEAT RAY, THEY GAVE HIM AN EXTRA HEART. AND THAT'S EXTRAORDINARY. THERE WILL NEVER COME A TIME WHEN WE DON'T NEED A HERO LIKE THE DOCTOR."); //prints the phrase to be encoded to the array "x"  above
+    
+    //following 3 encoded messages are provided with project
+    //sprintf(x, "RCR VYE BGBX HBNX FHB FXNQBRV YM RNXFH IZNQEBCJ FHB PCJB? C FHYEQHF KYF. CF'J KYF N JFYXV FHB DBRC PYEZR FBZZ VYE. CF'J N JCFH ZBQBKR. RNXFH IZNQEBCJ PNJ N RNXA ZYXR YM FHB JCFH, JY IYPBXMEZ NKR JY PCJB HB LYEZR EJB FHB MYXLB FY CKMZEBKLB FHB OCRCLHZYXCNKJ FY LXBNFB ZCMB… HB HNR JELH N AKYPZBRQB YM FHB RNXA JCRB FHNF HB LYEZR BGBK ABBI FHB YKBJ HB LNXBR NWYEF MXYO RVCKQ. FHB RNXA JCRB YM FHB MYXLB CJ N INFHPNV FY ONKV NWCZCFCBJ JYOB LYKJCRBX FY WB EKKNFEXNZ. HB WBLNOB JY IYPBXMEZ… FHB YKZV FHCKQ HB PNJ NMXNCR YM PNJ ZYJCKQ HCJ IYPBX, PHCLH BGBKFENZZV, YM LYEXJB, HB RCR. EKMYXFEKNFBZV, HB FNEQHF HCJ NIIXBKFCLB BGBXVFHCKQ HB AKBP, FHBK HCJ NIIXBKFCLB ACZZBR HCO CK HCJ JZBBI. CXYKCL. HB LYEZR JNGB YFHBXJ MXYO RBNFH, WEF KYF HCOJBZM."); //prints the phrase to be encoded to the array "x"  above
+    sprintf(x, "SJSFMPCRM WG O USBWIG. PIH WT MCI XIRUS O TWGV PM WHG OPWZWHM HC QZWAP O HFSS, WH KWZZ ZWJS WHG KVCZS ZWTS PSZWSJWBU HVOH WH WG GHIDWR. - OZPSFH SWBGHSWB"); //prints the phrase to be encoded to the array "x"  above
+    //sprintf(x, "TVU TVAOTH: AOL KHAH IYVBNOA AV BZ IF AOL IVAOHU ZWPLZ WPUWVPUAZ AOL LEHJA SVJHAPVU VM AOL LTWLYVY'Z ULD IHAASL ZAHAPVU. DL HSZV RUVD AOHA AOL DLHWVU ZFZALTZ VM AOPZ KLHAO ZAHY HYL UVA FLA VWLYHAPVUHS. DPAO AOL PTWLYPHS MSLLA ZWYLHK AOYVBNOVBA AOL NHSHEF PU H CHPU LMMVYA AV LUNHNL BZ, PA PZ YLSHAPCLSF BUWYVALJALK. IBA TVZA PTWVYAHUA VM HSS, DL'CL SLHYULK AOHA AOL LTWLYVY OPTZLSM PZ WLYZVUHSSF VCLYZLLPUN AOL MPUHS ZAHNLZ VM AOL JVUZAYBJAPVU VM AOPZ KLHAO ZAHY. THUF IVAOHUZ KPLK AV IYPUN BZ AOPZ PUMVYTHAPVU."); //prints the phrase to be encoded to the array "x"  above
     
     //this loop will convert any inputs that are lower case letters to upper case letters
     int y=0; //loop counter
@@ -37,7 +42,7 @@ int main() {
     rotate_decrypt(x, k); //calls function to decrypt using rotation cipher  */
     
     
-    substitute_encryptM (x); //calls function to encrypt using substitution cipher
+    //substitute_encryptM (x); //calls function to encrypt using substitution cipher
     //substitute_decryptM (x); //calls function to decrypt using substitution cipher
     
     //analysis (x); // calls function to analyse the frequency of letters
@@ -470,7 +475,7 @@ void substitute_decrypt_analysis () {
     //decrypts message statistically
     char alph[27] = {"ETAOINSHRDLUCMWFGYPBVKJXQZ"}; //alphabet in order of most common letters
     //char test[27] = {"IPCEKADFGTNOWMRQSVXZHULBJY"}; //most common letters of encrypted moffat to check code
-    analysis (str); //calls analysis function for frequency of letters
+    analysis (x); //calls analysis function for frequency of letters
     int y=1;
     /*printf("\n\n");
     while (y<53) {
@@ -490,8 +495,8 @@ void substitute_decrypt_analysis () {
     //char temp[1000];
     while(y<=size) {
         while(counter<26) {
-            if(str[z]==frq[i]) { //checks whether the character to be decoded is the same as the character of "frq" being checked
-                str[z]=alph[a]; //if so, makes the tested character equal to the equivalently frequent letter
+            if(x[z]==frq[i]) { //checks whether the character to be decoded is the same as the character of "frq" being checked
+                x[z]=alph[a]; //if so, makes the tested character equal to the equivalently frequent letter
                 //printf("%s\n", test); //prints rectified (partially) string
                 /*if(x[b]!=NULL) {
                     temp[b]=x[b];
@@ -512,5 +517,5 @@ void substitute_decrypt_analysis () {
         counter=0;
         a=0;
     }
-    printf("\n%s\n", str); //prints decoded message
+    printf("\n%s\n", x); //prints decoded message
 }
