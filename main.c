@@ -18,6 +18,46 @@ int main() {
     
     
     
+    //start of rotation keyless decryption: analysis + difference to determine key, then work out most common before using for entire code
+    int temp1=0;
+    int temp2=0;
+    //analysis(str);
+    int a=0;//, b=0, c=0, d=0, e=0, f=0, g=0, h=0, i=0, j=0, k=0, l=0, m=0, n=0, o=0, p=0, q=0, r=0, s=0, t=0, u=0, v=0, w=0, xn=0, yn=0, z=0;
+    char diff[27];
+    int y=0;
+    int counter=0;
+    char alpha[27] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"}; //alphabet for comparison
+
+    //x is "decoded", str is encoded
+//    while (alpha[counter]<=26) { //continues until end of message
+        //while(alpha[y]<=26) {
+        while(alpha[y]!=NULL) {
+            //if(alpha[y]==x[y]) {
+                if(x[y]>str[y]) {
+                    temp1=x[y];
+                    temp2=str[y];
+                    a=temp1-temp2;  
+                    printf("1: %d - %d = %d\n", temp1, temp2, a);
+                }
+                else if(str[y]>x[y]) {
+                    temp1=x[y];
+                    temp2=str[y];
+                    a=temp2-temp1;
+                    printf("2: %d - %d = %d\n", temp2, temp1, a);
+                }
+                y++;            
+            //}
+        //}
+        counter++;
+    }
+
+    /*printf("\n\n");
+    int count=0;
+    while(count<27) {
+        printf("%d: %c\n", count, diff[count]);
+        count++;
+    } */
+    
     
     
     
@@ -37,8 +77,8 @@ void cleanup () {
     
     //following 3 encoded messages are provided with project
     //sprintf(x, "RCR VYE BGBX HBNX FHB FXNQBRV YM RNXFH IZNQEBCJ FHB PCJB? C FHYEQHF KYF. CF'J KYF N JFYXV FHB DBRC PYEZR FBZZ VYE. CF'J N JCFH ZBQBKR. RNXFH IZNQEBCJ PNJ N RNXA ZYXR YM FHB JCFH, JY IYPBXMEZ NKR JY PCJB HB LYEZR EJB FHB MYXLB FY CKMZEBKLB FHB OCRCLHZYXCNKJ FY LXBNFB ZCMB… HB HNR JELH N AKYPZBRQB YM FHB RNXA JCRB FHNF HB LYEZR BGBK ABBI FHB YKBJ HB LNXBR NWYEF MXYO RVCKQ. FHB RNXA JCRB YM FHB MYXLB CJ N INFHPNV FY ONKV NWCZCFCBJ JYOB LYKJCRBX FY WB EKKNFEXNZ. HB WBLNOB JY IYPBXMEZ… FHB YKZV FHCKQ HB PNJ NMXNCR YM PNJ ZYJCKQ HCJ IYPBX, PHCLH BGBKFENZZV, YM LYEXJB, HB RCR. EKMYXFEKNFBZV, HB FNEQHF HCJ NIIXBKFCLB BGBXVFHCKQ HB AKBP, FHBK HCJ NIIXBKFCLB ACZZBR HCO CK HCJ JZBBI. CXYKCL. HB LYEZR JNGB YFHBXJ MXYO RBNFH, WEF KYF HCOJBZM."); //prints the phrase to be encoded to the array "x"  above
-    sprintf(x, "SJSFMPCRM WG O USBWIG. PIH WT MCI XIRUS O TWGV PM WHG OPWZWHM HC QZWAP O HFSS, WH KWZZ ZWJS WHG KVCZS ZWTS PSZWSJWBU HVOH WH WG GHIDWR. - OZPSFH SWBGHSWB"); //prints the phrase to be encoded to the array "x"  above
-    //sprintf(x, "TVU TVAOTH: AOL KHAH IYVBNOA AV BZ IF AOL IVAOHU ZWPLZ WPUWVPUAZ AOL LEHJA SVJHAPVU VM AOL LTWLYVY'Z ULD IHAASL ZAHAPVU. DL HSZV RUVD AOHA AOL DLHWVU ZFZALTZ VM AOPZ KLHAO ZAHY HYL UVA FLA VWLYHAPVUHS. DPAO AOL PTWLYPHS MSLLA ZWYLHK AOYVBNOVBA AOL NHSHEF PU H CHPU LMMVYA AV LUNHNL BZ, PA PZ YLSHAPCLSF BUWYVALJALK. IBA TVZA PTWVYAHUA VM HSS, DL'CL SLHYULK AOHA AOL LTWLYVY OPTZLSM PZ WLYZVUHSSF VCLYZLLPUN AOL MPUHS ZAHNLZ VM AOL JVUZAYBJAPVU VM AOPZ KLHAO ZAHY. THUF IVAOHUZ KPLK AV IYPUN BZ AOPZ PUMVYTHAPVU."); //prints the phrase to be encoded to the array "x"  above
+    //sprintf(x, "SJSFMPCRM WG O USBWIG. PIH WT MCI XIRUS O TWGV PM WHG OPWZWHM HC QZWAP O HFSS, WH KWZZ ZWJS WHG KVCZS ZWTS PSZWSJWBU HVOH WH WG GHIDWR. - OZPSFH SWBGHSWB"); //prints the phrase to be encoded to the array "x"  above
+    sprintf(x, "TVU TVAOTH: AOL KHAH IYVBNOA AV BZ IF AOL IVAOHU ZWPLZ WPUWVPUAZ AOL LEHJA SVJHAPVU VM AOL LTWLYVY'Z ULD IHAASL ZAHAPVU. DL HSZV RUVD AOHA AOL DLHWVU ZFZALTZ VM AOPZ KLHAO ZAHY HYL UVA FLA VWLYHAPVUHS. DPAO AOL PTWLYPHS MSLLA ZWYLHK AOYVBNOVBA AOL NHSHEF PU H CHPU LMMVYA AV LUNHNL BZ, PA PZ YLSHAPCLSF BUWYVALJALK. IBA TVZA PTWVYAHUA VM HSS, DL'CL SLHYULK AOHA AOL LTWLYVY OPTZLSM PZ WLYZVUHSSF VCLYZLLPUN AOL MPUHS ZAHNLZ VM AOL JVUZAYBJAPVU VM AOPZ KLHAO ZAHY. THUF IVAOHUZ KPLK AV IYPUN BZ AOPZ PUMVYTHAPVU."); //prints the phrase to be encoded to the array "x"  above
     
     //this loop will convert any inputs that are lower case letters to upper case letters
     int y=0; //loop counter
@@ -51,6 +91,7 @@ void cleanup () {
             y++; //increments loop counter
         }
     }
+    sprintf(str, "%s", x);
     
 /*    int k=-15; //decryption key
     
@@ -183,8 +224,8 @@ void substitute_encryptM (char x[]) {
         z++; //increments for this loop and to check the next letter of the message
     } 
     //printf("%s\n", x); //prints encrypted message
-    sprintf(str, "%s", x);
-    printf("%s\n", str);
+    //sprintf(str, "%s", x);
+    printf("%s\n", x);
 }
 
 
@@ -502,7 +543,7 @@ void substitute_decrypt_analysis () {
     int a=0;
     //int b=0;
     int counter=0;
-    int size = sizeof(str)/sizeof(str[0]); //calculates the how many characters there are in "x" (for how many times to run loop)
+    int size = sizeof(x)/sizeof(x[0]); //calculates the how many characters there are in "x" (for how many times to run loop)
     size+=2; //adds 2 to the loop counter condition to make sure every letter is changed
     //char temp[1000];
     while(y<=size) {
