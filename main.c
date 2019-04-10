@@ -11,7 +11,26 @@ int frq[53]; // declares global array frq to hold the frequency of letters for s
 char str[1000] ;//= {"EIKDIR PKI AOXDKCPFC. EIKDIR CINN VR TED TI TPFC CD HI HVC TEIF CEIW OPGI CEAR XPKCAQVNPK EIKD CEIW GAGF'C MASI EAO P MVF, CEIW MPSI EAO P RQKITGKASIK CD UAZ CEAFMR. CEIW GAGF'C MASI EAO P CPFL DK P TPKREAX DK PF Z-TAFM, CEIW MPSI EAO P QPNN HDZ UKDO TEAQE WDV QPF QPNN UDK EINX PFG CEIW GAGF'C MASI EAO P RVXIKXDTIK DK P EIPC KPW, CEIW MPSI EAO PF IZCKP EIPKC. PFG CEPC'R IZCKPDKGAFPKW. CEIKI TANN FISIK QDOI P CAOI TEIF TI GDF'C FIIG P EIKD NALI CEI GDQCDK."};
 char x[1000]; //global array to hold string
 
+void cleanup (); //function just to clean up main REPLACE WHEN FINNISHED!!!!!!!!!!!!!
+
 int main() {
+    cleanup ();
+    
+    
+    
+    
+    
+    
+    
+    
+    return 0; 
+}
+
+
+
+
+
+void cleanup () {
     //sprintf(x, "ATTACK AT DAWN"); //prints the phrase to be encoded to the array "x"  above
     //sprintf(x, "ABCDEFGHIJKLMNOPQRSTUVWXYZ"); //prints the phrase to be encoded to the array "x"  above
     //sprintf(x, "HEROES ARE IMPORTANT. HEROES TELL US WHO WE WANT TO BE BUT WHEN THEY MADE THIS PARTICULAR HERO THEY DIDN'T GIVE HIM A GUN, THEY GAVE HIM A SCREWDRIVER TO FIX THINGS. THEY DIDN'T GIVE HIM A TANK OR A WARSHIP OR AN X-WING, THEY GAVE HIM A CALL BOX FROM WHICH YOU CAN CALL FOR HELP AND THEY DIDN'T GIVE HIM A SUPERPOWER OR A HEAT RAY, THEY GAVE HIM AN EXTRA HEART. AND THAT'S EXTRAORDINARY. THERE WILL NEVER COME A TIME WHEN WE DON'T NEED A HERO LIKE THE DOCTOR."); //prints the phrase to be encoded to the array "x"  above
@@ -58,14 +77,7 @@ int main() {
     
     substitute_decrypt_analysis (); //calls function to decrypt using substitution cipher statistically
     
-    return 0; 
 }
-
-
-
-
-
-
 
 
 
