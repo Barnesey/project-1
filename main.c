@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 
 //functions: decrypt rotation cipher CIPHER TEXT ONLY, decrypt substitution cipher CIPHER TEXT ONLY
 void rotate_encrypt (char x[], int k); //function to encrypt using rotation cipher
@@ -17,47 +18,33 @@ int main() {
     cleanup ();
     
     
-    
-    //start of rotation keyless decryption: analysis + difference to determine key, then work out most common before using for entire code
-    int temp1=0;
-    int temp2=0;
-    //analysis(str);
-    int a=0;//, b=0, c=0, d=0, e=0, f=0, g=0, h=0, i=0, j=0, k=0, l=0, m=0, n=0, o=0, p=0, q=0, r=0, s=0, t=0, u=0, v=0, w=0, xn=0, yn=0, z=0;
-    char diff[27];
-    int y=0;
-    int counter=0;
-    char alpha[27] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"}; //alphabet for comparison
-
-    //x is "decoded", str is encoded
-//    while (alpha[counter]<=26) { //continues until end of message
-        //while(alpha[y]<=26) {
-        while(alpha[y]!=NULL) {
-            //if(alpha[y]==x[y]) {
-                if(x[y]>str[y]) {
-                    temp1=x[y];
-                    temp2=str[y];
-                    a=temp1-temp2;  
-                    printf("1: %d - %d = %d\n", temp1, temp2, a);
+    int k=-25;
+    while(k<26) {
+        //this loop will decrypt a rotation cipher
+        if(k<26 && k>-26) { //ensures encryption key is valid
+            int y=0; //loop couner
+            while(x[y]!=NULL) {  //loop that will continue until the end of the string
+                if(x[y]>64 && x[y]<91) {  //ensures only letters are having their ascii changed
+                    x[y]=x[y]+k;   //decodes the letter by shunting it according to the decryption key (k)
+                    if(x[y]>90) { //if encryption shunts to above of letter range, this will shunt to beginning of letter range
+                        x[y]=x[y]-26;
+                    }
+                    if(x[y]<65) { //if decryption shunts to below of letter range, this will shunt to end of letter range
+                        x[y]=x[y]+26;
+                    }
+                    y++;   //increments loop counter to decode the next letter
                 }
-                else if(str[y]>x[y]) {
-                    temp1=x[y];
-                    temp2=str[y];
-                    a=temp2-temp1;
-                    printf("2: %d - %d = %d\n", temp2, temp1, a);
+                else {  //if ascii value is not for a letter, this will print it unchanged
+                    y++; //increments loop counter to decode next letter
                 }
-                y++;            
-            //}
-        //}
-        counter++;
+            }
+            printf("%s\n", x); //prints decoded phrase
+        }
+        else { //if encryption key isnt valid, prints error message
+            printf("error: invalid decryption key\n");
+        }
+        k++;
     }
-
-    /*printf("\n\n");
-    int count=0;
-    while(count<27) {
-        printf("%d: %c\n", count, diff[count]);
-        count++;
-    } */
-    
     
     
     
@@ -116,7 +103,7 @@ void cleanup () {
         count++;
     } */
     
-    substitute_decrypt_analysis (); //calls function to decrypt using substitution cipher statistically
+    //substitute_decrypt_analysis (); //calls function to decrypt using substitution cipher statistically
     
 }
 
@@ -480,7 +467,7 @@ void analysis (char x[]) {
     } */
     
     count=1;
-    while(counta<100) { //repeats until
+    while(counta<100) { //repeats for 100 iterations
         while (counter<countb) { //
             if (frq[count] < frq[counter]) { //checks which number is bigger
                 //assigns the greater number sooner in the array
