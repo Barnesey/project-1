@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 //functions: decrypt rotation cipher CIPHER TEXT ONLY, decrypt substitution cipher CIPHER TEXT ONLY
 void rotate_encrypt (char x[], int k); //function to encrypt using rotation cipher
@@ -38,8 +39,8 @@ void cleanup () {
     
     //following 3 encoded messages are provided with project
     //sprintf(x, "RCR VYE BGBX HBNX FHB FXNQBRV YM RNXFH IZNQEBCJ FHB PCJB? C FHYEQHF KYF. CF'J KYF N JFYXV FHB DBRC PYEZR FBZZ VYE. CF'J N JCFH ZBQBKR. RNXFH IZNQEBCJ PNJ N RNXA ZYXR YM FHB JCFH, JY IYPBXMEZ NKR JY PCJB HB LYEZR EJB FHB MYXLB FY CKMZEBKLB FHB OCRCLHZYXCNKJ FY LXBNFB ZCMB… HB HNR JELH N AKYPZBRQB YM FHB RNXA JCRB FHNF HB LYEZR BGBK ABBI FHB YKBJ HB LNXBR NWYEF MXYO RVCKQ. FHB RNXA JCRB YM FHB MYXLB CJ N INFHPNV FY ONKV NWCZCFCBJ JYOB LYKJCRBX FY WB EKKNFEXNZ. HB WBLNOB JY IYPBXMEZ… FHB YKZV FHCKQ HB PNJ NMXNCR YM PNJ ZYJCKQ HCJ IYPBX, PHCLH BGBKFENZZV, YM LYEXJB, HB RCR. EKMYXFEKNFBZV, HB FNEQHF HCJ NIIXBKFCLB BGBXVFHCKQ HB AKBP, FHBK HCJ NIIXBKFCLB ACZZBR HCO CK HCJ JZBBI. CXYKCL. HB LYEZR JNGB YFHBXJ MXYO RBNFH, WEF KYF HCOJBZM."); //prints the phrase to be encoded to the array "x"  above
-    //sprintf(x, "SJSFMPCRM WG O USBWIG. PIH WT MCI XIRUS O TWGV PM WHG OPWZWHM HC QZWAP O HFSS, WH KWZZ ZWJS WHG KVCZS ZWTS PSZWSJWBU HVOH WH WG GHIDWR. - OZPSFH SWBGHSWB"); //prints the phrase to be encoded to the array "x"  above
-    sprintf(x, "TVU TVAOTH: AOL KHAH IYVBNOA AV BZ IF AOL IVAOHU ZWPLZ WPUWVPUAZ AOL LEHJA SVJHAPVU VM AOL LTWLYVY'Z ULD IHAASL ZAHAPVU. DL HSZV RUVD AOHA AOL DLHWVU ZFZALTZ VM AOPZ KLHAO ZAHY HYL UVA FLA VWLYHAPVUHS. DPAO AOL PTWLYPHS MSLLA ZWYLHK AOYVBNOVBA AOL NHSHEF PU H CHPU LMMVYA AV LUNHNL BZ, PA PZ YLSHAPCLSF BUWYVALJALK. IBA TVZA PTWVYAHUA VM HSS, DL'CL SLHYULK AOHA AOL LTWLYVY OPTZLSM PZ WLYZVUHSSF VCLYZLLPUN AOL MPUHS ZAHNLZ VM AOL JVUZAYBJAPVU VM AOPZ KLHAO ZAHY. THUF IVAOHUZ KPLK AV IYPUN BZ AOPZ PUMVYTHAPVU."); //prints the phrase to be encoded to the array "x"  above
+    sprintf(x, "SJSFMPCRM WG O USBWIG. PIH WT MCI XIRUS O TWGV PM WHG OPWZWHM HC QZWAP O HFSS, WH KWZZ ZWJS WHG KVCZS ZWTS PSZWSJWBU HVOH WH WG GHIDWR. - OZPSFH SWBGHSWB"); //prints the phrase to be encoded to the array "x"  above
+    //sprintf(x, "TVU TVAOTH: AOL KHAH IYVBNOA AV BZ IF AOL IVAOHU ZWPLZ WPUWVPUAZ AOL LEHJA SVJHAPVU VM AOL LTWLYVY'Z ULD IHAASL ZAHAPVU. DL HSZV RUVD AOHA AOL DLHWVU ZFZALTZ VM AOPZ KLHAO ZAHY HYL UVA FLA VWLYHAPVUHS. DPAO AOL PTWLYPHS MSLLA ZWYLHK AOYVBNOVBA AOL NHSHEF PU H CHPU LMMVYA AV LUNHNL BZ, PA PZ YLSHAPCLSF BUWYVALJALK. IBA TVZA PTWVYAHUA VM HSS, DL'CL SLHYULK AOHA AOL LTWLYVY OPTZLSM PZ WLYZVUHSSF VCLYZLLPUN AOL MPUHS ZAHNLZ VM AOL JVUZAYBJAPVU VM AOPZ KLHAO ZAHY. THUF IVAOHUZ KPLK AV IYPUN BZ AOPZ PUMVYTHAPVU."); //prints the phrase to be encoded to the array "x"  above
     
     //this loop will convert any inputs that are lower case letters to upper case letters
     int y=0; //loop counter
@@ -542,7 +543,9 @@ void substitute_decrypt_analysis () {
 
 void rotate_decrypt_brute () {
     int y=0; //loop couner
-    int k=-25;
+    int k=0;
+    char A[] = {" A "};
+    char I[] = {" I "};
     while(k<26) {
         //this loop will decrypt a rotation cipher
         if(k<26 && k>-26) { //ensures encryption key is valid
@@ -555,18 +558,22 @@ void rotate_decrypt_brute () {
                     if(x[y]<65) { //if decryption shunts to below of letter range, this will shunt to end of letter range
                         x[y]=x[y]+26;
                     }
-                    y++;   //increments loop counter to decode the next letter
+                    //y++;   //increments loop counter to decode the next letter
                 }
                 else {  //if ascii value is not for a letter, this will print it unchanged
-                    y++; //increments loop counter to decode next letter
+                    //y++; //increments loop counter to decode next letter
                 }
+                y++;
             }
-            printf("%s\n", x); //prints decoded phrase
+            if(strstr(x, A)!=NULL || strstr(x, I)!=NULL) {
+                printf("%s\n", x); //prints decoded phrase
+            }
         }
         else { //if encryption key isnt valid, prints error message
             printf("error: invalid decryption key\n");
         }
         k++;
         y=0;
+        sprintf(x, "%s", str);
     }
 }
