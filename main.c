@@ -9,38 +9,17 @@ void substitute_encryptM (char x[]); //function to encrypt using substitution ci
 void substitute_decryptM (char x[]); //function to decrypt using substitution cipher - manual selection of key
 void analysis (char x[]); //analyses frequency of letters in a string for statistical decryption
 void substitute_decrypt_analysis (); //function to decrypt using substitution cipher statistically
-void rotate_decrypt_brute ();
+void rotate_decrypt_brute (); //function to decrypt rotation cipher
 int frq[53]; // declares global array frq to hold the frequency of letters for statistical decryption
-char str[1000] ;//= {"EIKDIR PKI AOXDKCPFC. EIKDIR CINN VR TED TI TPFC CD HI HVC TEIF CEIW OPGI CEAR XPKCAQVNPK EIKD CEIW GAGF'C MASI EAO P MVF, CEIW MPSI EAO P RQKITGKASIK CD UAZ CEAFMR. CEIW GAGF'C MASI EAO P CPFL DK P TPKREAX DK PF Z-TAFM, CEIW MPSI EAO P QPNN HDZ UKDO TEAQE WDV QPF QPNN UDK EINX PFG CEIW GAGF'C MASI EAO P RVXIKXDTIK DK P EIPC KPW, CEIW MPSI EAO PF IZCKP EIPKC. PFG CEPC'R IZCKPDKGAFPKW. CEIKI TANN FISIK QDOI P CAOI TEIF TI GDF'C FIIG P EIKD NALI CEI GDQCDK."};
+char str[1000]; //global array to hold string
 char x[1000]; //global array to hold string
 
-void cleanup (); //function just to clean up main REPLACE WHEN FINNISHED!!!!!!!!!!!!!
+void cleanup (); //function just to clean up main REPLACE WHEN FINISHED!!!!!!!!!!!!!
 
 int main() {
-    cleanup ();
-    
-    
-    
-    
-    
-    
-    
-    return 0; 
-}
-
-
-
-
-
-void cleanup () {
-    //sprintf(x, "ATTACK AT DAWN"); //prints the phrase to be encoded to the array "x"  above
-    //sprintf(x, "ABCDEFGHIJKLMNOPQRSTUVWXYZ"); //prints the phrase to be encoded to the array "x"  above
-    //sprintf(x, "HEROES ARE IMPORTANT. HEROES TELL US WHO WE WANT TO BE BUT WHEN THEY MADE THIS PARTICULAR HERO THEY DIDN'T GIVE HIM A GUN, THEY GAVE HIM A SCREWDRIVER TO FIX THINGS. THEY DIDN'T GIVE HIM A TANK OR A WARSHIP OR AN X-WING, THEY GAVE HIM A CALL BOX FROM WHICH YOU CAN CALL FOR HELP AND THEY DIDN'T GIVE HIM A SUPERPOWER OR A HEAT RAY, THEY GAVE HIM AN EXTRA HEART. AND THAT'S EXTRAORDINARY. THERE WILL NEVER COME A TIME WHEN WE DON'T NEED A HERO LIKE THE DOCTOR."); //prints the phrase to be encoded to the array "x"  above
-    
-    //following 3 encoded messages are provided with project
-    //sprintf(x, "RCR VYE BGBX HBNX FHB FXNQBRV YM RNXFH IZNQEBCJ FHB PCJB? C FHYEQHF KYF. CF'J KYF N JFYXV FHB DBRC PYEZR FBZZ VYE. CF'J N JCFH ZBQBKR. RNXFH IZNQEBCJ PNJ N RNXA ZYXR YM FHB JCFH, JY IYPBXMEZ NKR JY PCJB HB LYEZR EJB FHB MYXLB FY CKMZEBKLB FHB OCRCLHZYXCNKJ FY LXBNFB ZCMB… HB HNR JELH N AKYPZBRQB YM FHB RNXA JCRB FHNF HB LYEZR BGBK ABBI FHB YKBJ HB LNXBR NWYEF MXYO RVCKQ. FHB RNXA JCRB YM FHB MYXLB CJ N INFHPNV FY ONKV NWCZCFCBJ JYOB LYKJCRBX FY WB EKKNFEXNZ. HB WBLNOB JY IYPBXMEZ… FHB YKZV FHCKQ HB PNJ NMXNCR YM PNJ ZYJCKQ HCJ IYPBX, PHCLH BGBKFENZZV, YM LYEXJB, HB RCR. EKMYXFEKNFBZV, HB FNEQHF HCJ NIIXBKFCLB BGBXVFHCKQ HB AKBP, FHBK HCJ NIIXBKFCLB ACZZBR HCO CK HCJ JZBBI. CXYKCL. HB LYEZR JNGB YFHBXJ MXYO RBNFH, WEF KYF HCOJBZM."); //prints the phrase to be encoded to the array "x"  above
-    //sprintf(x, "SJSFMPCRM WG O USBWIG. PIH WT MCI XIRUS O TWGV PM WHG OPWZWHM HC QZWAP O HFSS, WH KWZZ ZWJS WHG KVCZS ZWTS PSZWSJWBU HVOH WH WG GHIDWR. - OZPSFH SWBGHSWB"); //prints the phrase to be encoded to the array "x"  above
-    //sprintf(x, "TVU TVAOTH: AOL KHAH IYVBNOA AV BZ IF AOL IVAOHU ZWPLZ WPUWVPUAZ AOL LEHJA SVJHAPVU VM AOL LTWLYVY'Z ULD IHAASL ZAHAPVU. DL HSZV RUVD AOHA AOL DLHWVU ZFZALTZ VM AOPZ KLHAO ZAHY HYL UVA FLA VWLYHAPVUHS. DPAO AOL PTWLYPHS MSLLA ZWYLHK AOYVBNOVBA AOL NHSHEF PU H CHPU LMMVYA AV LUNHNL BZ, PA PZ YLSHAPCLSF BUWYVALJALK. IBA TVZA PTWVYAHUA VM HSS, DL'CL SLHYULK AOHA AOL LTWLYVY OPTZLSM PZ WLYZVUHSSF VCLYZLLPUN AOL MPUHS ZAHNLZ VM AOL JVUZAYBJAPVU VM AOPZ KLHAO ZAHY. THUF IVAOHUZ KPLK AV IYPUN BZ AOPZ PUMVYTHAPVU."); //prints the phrase to be encoded to the array "x"  above
+    FILE *input;
+    input=fopen("input.txt", "r");
+    fscanf(input, "%[^\n]", &x);
     
     //this loop will convert any inputs that are lower case letters to upper case letters
     int y=0; //loop counter
@@ -55,35 +34,23 @@ void cleanup () {
     }
     sprintf(str, "%s", x);
     
-/*    int k=-15; //decryption key
     
-    rotate_encrypt (x, k); //calls function to encrypt using rotation cipher
+    int interface;
+    int k;
+    printf("  Select an option then press <enter>.\n1: Encrypt using a rotation cipher.\n2: Decrypt using rotation cipher (known key).\n3: Encrypt using substitution cipher.\n4: Decrypt using substitution cipher (known key).\n5: Decrypt substitution cipher analytically.\n6: Decrypt rotation cipher with brute force and some analysis.\n");
+    scanf("%d", &interface);
+    switch(interface) {
+        case 1: printf("enter key\n"); scanf("%d", &k); rotate_encrypt (x, k); break; //calls function to encrypt using rotation cipher
+        case 2: printf("enter key\n"); scanf("%d", &k); rotate_decrypt (x, k); break; //calls function to decrypt using rotation cipher 
+        case 3: substitute_encryptM (x); break; //calls function to encrypt using substitution cipher
+        case 4: substitute_decryptM (x); break; //calls function to decrypt using substitution cipher
+        case 5: substitute_decrypt_analysis (); break; //calls function to decrypt using substitution cipher statistically
+        case 6: rotate_decrypt_brute (); break; //calls function to decrypt rotation cipher using brute force method
+        default: printf("invalid input\n"); break;
+    }
     
-    k=k-(k*2); //changes encryption key to decode phrase
-    
-    rotate_decrypt(x, k); //calls function to decrypt using rotation cipher  */
-    
-    
-    //substitute_encryptM (x); //calls function to encrypt using substitution cipher
-    //substitute_decryptM (x); //calls function to decrypt using substitution cipher
-    
-    //analysis (x); // calls function to analyse the frequency of letters
-    
-    printf("\n\n"); //prints new lines for gap
-    //prints the letters in order of frequency and number of times they appear as determined in analysis function
-    /*int count=1;
-    while(count<53) {
-        printf("%c: %d\n", frq[count-1], frq[count]);
-        count++;
-        count++;
-    } */
-    
-    //substitute_decrypt_analysis (); //calls function to decrypt using substitution cipher statistically
-    rotate_decrypt_brute ();
-    
+    return 0; 
 }
-
-
 
 
 
@@ -120,7 +87,7 @@ void rotate_encrypt (char x[], int k) {
         printf("%s\n", x); //prints encoded phrase
         FILE *output;
         output=fopen("output.txt", "w");
-        fprintf(output, "%s", x);
+        fprintf(output, "%s", x); 
         }
     else { //if encryption key isnt valid, prints error message
         printf("error: invalid encryption key\n");
@@ -162,7 +129,7 @@ void rotate_decrypt (char x[], int k) {
         printf("%s\n", x); //prints decoded phrase
         FILE *output;
         output=fopen("output.txt", "w");
-        fprintf(output, "%s", x);
+        fprintf(output, "%s", x); 
     }
     else { //if encryption key isnt valid, prints error message
         printf("error: invalid decryption key\n");
@@ -578,11 +545,17 @@ void rotate_decrypt_brute () {
                 }
                 y++;
             }
-            if(strstr(x, A)!=NULL || strstr(x, I)!=NULL) {
+            if(strstr(x, A)!=NULL) {
                 printf("%s\n", x); //prints decoded phrase
                 FILE *output;
-                output=fopen("output.txt", "");
-                fprintf(output, "%s", x);
+                output=fopen("output.txt", "a");
+                fprintf(output, "%s", x); 
+            }
+            if(strstr(x, I)!=NULL) {
+                printf("%s\n", x); //prints decoded phrase
+                FILE *output;
+                output=fopen("output.txt", "a");
+                fprintf(output, "%s", x); 
             }
         }
         else { //if encryption key isnt valid, prints error message
