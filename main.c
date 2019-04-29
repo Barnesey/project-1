@@ -1,6 +1,6 @@
 #include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include<stdlib.h> //for sizeof function (?)
+#include<string.h> //for strstr function
 
 //functions: decrypt rotation cipher CIPHER TEXT ONLY, decrypt substitution cipher CIPHER TEXT ONLY
 void rotate_encrypt (char x[], int k); //function to encrypt using rotation cipher
@@ -14,12 +14,11 @@ int frq[53]; // declares global array frq to hold the frequency of letters for s
 char str[1000]; //global array to hold string
 char x[1000]; //global array to hold string
 
-void cleanup (); //function just to clean up main REPLACE WHEN FINISHED!!!!!!!!!!!!!
 
 int main() {
     FILE *input;
-    input=fopen("input.txt", "r");
-    fscanf(input, "%[^\n]", &x);
+    input=fopen("input.txt", "r"); //opens file to read from
+    fscanf(input, "%[^\n]", &x); //reads first line of file
     
     //this loop will convert any inputs that are lower case letters to upper case letters
     int y=0; //loop counter
@@ -86,8 +85,8 @@ void rotate_encrypt (char x[], int k) {
         }
         printf("%s\n", x); //prints encoded phrase
         FILE *output;
-        output=fopen("output.txt", "w");
-        fprintf(output, "%s", x); 
+        output=fopen("output.txt", "w"); //opens file to write to
+        fprintf(output, "%s", x); //prints encoded phrase to file
         }
     else { //if encryption key isnt valid, prints error message
         printf("error: invalid encryption key\n");
@@ -128,8 +127,8 @@ void rotate_decrypt (char x[], int k) {
         }
         printf("%s\n", x); //prints decoded phrase
         FILE *output;
-        output=fopen("output.txt", "w");
-        fprintf(output, "%s", x); 
+        output=fopen("output.txt", "w"); //opens file to write to
+        fprintf(output, "%s", x); //prints decoded phrase to file
     }
     else { //if encryption key isnt valid, prints error message
         printf("error: invalid decryption key\n");
@@ -159,10 +158,10 @@ void substitute_encryptM (char x[]) {
         y=0; //resets loop counter/alphabet counter to restart inner loop
         z++; //increments for this loop and to check the next letter of the message
     } 
-    printf("%s\n", x);
+    printf("%s\n", x); //prints encoded phrase
     FILE *output;
-    output=fopen("output.txt", "w");
-    fprintf(output, "%s", x);
+    output=fopen("output.txt", "w"); //opens file to write to
+    fprintf(output, "%s", x); //prints encoded phrase to file
 }
 
 
@@ -186,8 +185,8 @@ void substitute_decryptM (char x[]) {
     } 
     printf("%s\n", x); //prints decrypted message
     FILE *output;
-    output=fopen("output.txt", "w");
-    fprintf(output, "%s", x);
+    output=fopen("output.txt", "w"); //opens file to write to
+    fprintf(output, "%s", x); //prints decoded phrase to file
 }
 
 
@@ -413,12 +412,7 @@ void analysis (char x[]) {
     int counta=0;
     int countb=53;
     
-    /*while(count<53) {
-        printf("%c: %d\n", frq[count-1], frq[count]);
-        count++;
-        count++;
-    } */
-    
+
     count=1;
     while(counta<100) { //repeats for 100 iterations
         while (counter<countb) { //
@@ -444,16 +438,6 @@ void analysis (char x[]) {
         countb--;
         counta++; //increments counter for this loop
     }
-    
-    
-    /*printf("\n\n");
-    count=1;
-    while(count<53) {
-        printf("%c: %d\n", frq[count-1], frq[count]);
-        count++;
-        count++;
-    } */
-    
 }
 
 
@@ -469,15 +453,7 @@ void substitute_decrypt_analysis () {
     char alph[27] = {"ETAOINSHRDLUCMWFGYPBVKJXQZ"}; //alphabet in order of most common letters
     //char test[27] = {"IPCEKADFGTNOWMRQSVXZHULBJY"}; //most common letters of encrypted moffat to check code
     analysis (x); //calls analysis function for frequency of letters
-    int y=1;
-    /*printf("\n\n");
-    while (y<53) {
-        printf("%c: %d\n", frq[y-1], frq[y]);
-        y++;
-        y++;
-    } */
-    
-    y=0;
+    int y=0;
     int i=0;
     int z=0;
     int a=0;
@@ -512,8 +488,8 @@ void substitute_decrypt_analysis () {
     }
     printf("\n%s\n", x); //prints decoded message
     FILE *output;
-    output=fopen("output.txt", "w");
-    fprintf(output, "%s", x);
+    output=fopen("output.txt", "w"); //opens file to write to
+    fprintf(output, "%s", x); //prints decoded phrase to file
 }
 
 
@@ -545,24 +521,24 @@ void rotate_decrypt_brute () {
                 }
                 y++;
             }
-            if(strstr(x, A)!=NULL) {
+            if(strstr(x, A)!=NULL) { //if the string A is in the string x this will print x
                 printf("%s\n", x); //prints decoded phrase
-                FILE *output;
-                output=fopen("output.txt", "a");
-                fprintf(output, "%s", x); 
+                FILE *output; 
+                output=fopen("output.txt", "a"); //opens file to write to the end of
+                fprintf(output, "%s", x); //prints decoded phrase to end of file
             }
-            if(strstr(x, I)!=NULL) {
+            if(strstr(x, I)!=NULL) { //if the string I is in the string x this will print x
                 printf("%s\n", x); //prints decoded phrase
                 FILE *output;
-                output=fopen("output.txt", "a");
-                fprintf(output, "%s", x); 
+                output=fopen("output.txt", "a"); //opens file to write to the end of
+                fprintf(output, "%s", x); //prints decoded phrase to end of file
             }
         }
         else { //if encryption key isnt valid, prints error message
             printf("error: invalid decryption key\n");
         }
         k++;
-        y=0;
-        sprintf(x, "%s", str);
+        y=0; //resets counter for next attempt
+        sprintf(x, "%s", str); //resets string for next attempt
     }
 }
